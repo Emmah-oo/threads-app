@@ -32,10 +32,10 @@ export default function RootLayout({
         <body className={inter.className}>
           <Topbar />
 
-          <main className='flex flex-row'>
+          <main className=''>
             <LeftSidebar />
-            <section className='main-container'>
-              <div className='w-full max-w-4xl'>{children}</div>
+            <section className=''>
+              <div className=''>{children}</div>
             </section>
             {/* @ts-ignore */}
             <RightSidebar />

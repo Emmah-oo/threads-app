@@ -1,10 +1,10 @@
 import React from "react";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, SignedIn } from "@clerk/nextjs";
 
 const Page = () => {
   return (
     <div>
-      <UserButton afterSignOutUrl="/" />
+      Page
     </div>
   );
 };

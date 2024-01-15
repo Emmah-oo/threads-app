@@ -3,7 +3,7 @@ import { UserButton, SignedIn } from "@clerk/nextjs";
 
 const Page = () => {
   return (
-    <div>
+    <div className="w-[100%]">
       Page
     </div>
   );

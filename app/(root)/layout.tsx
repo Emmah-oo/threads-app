@@ -32,9 +32,9 @@ export default function RootLayout({
         <body className={inter.className}>
           <Topbar />
 
-          <main className=''>
+          <main className='flex w-[100%] justify-between'>
             <LeftSidebar />
-            <section className=''>
+            <section className='w-[50%] mx-auto p-6'>
               <div className=''>{children}</div>
             </section>
             {/* @ts-ignore */}

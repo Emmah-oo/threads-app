@@ -1,8 +1,11 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { usePathname } from "next/navigation";
 
 const Bottombar = () => {
+  const pathname = usePathname();
   const sidebarLinks = [
     {
       imgURL: "/assets/home.svg",
@@ -37,13 +40,24 @@ const Bottombar = () => {
   ];
   return (
     <section className="fixed bottom-0 w-full block md:hidden">
-      <div className="flex gap-10 align-center justify-center mt-10">
-        {sidebarLinks.map((link, i) => (
-          <Link href={link.route} key={i} className="flex flex-col items-center gap-3">
-            <Image src={link.imgURL} height={30} width={30} alt={link.label} />
-            
-          </Link>
-        ))}
+      <div className="flex gap-6 pb-2 align-center justify-center mt-10">
+        {sidebarLinks.map((link, i) => {
+          const isActive = link.route === pathname
+          return (
+            <Link
+              href={link.route}
+              key={i}
+              className={`flex items-center gap-3 hover:bg-blue-500 p-2 rounded-lg transition-all ${isActive ? 'bg-blue-500 ' : ''}`}
+            >
+              <Image
+                src={link.imgURL}
+                height={30}
+                width={30}
+                alt={link.label}
+              />
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

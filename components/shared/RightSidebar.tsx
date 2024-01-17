@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
 
 const RightSidebar = () => {
   return (
-    <div className='mr-10'>RightSidebar</div>
-  )
-}
+    <section className="mr-10 p-5 hidden lg:block">
+      <div className="flex gap-10 flex-col">
+        <div>Suggested Communities</div>
+        <div>Similar minds</div>
+      </div>
+    </section>
+  );
+};
 
-export default RightSidebar
+export default RightSidebar;

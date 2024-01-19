@@ -34,7 +34,7 @@ export default function RootLayout({
 
           <main className='flex w-[100%] justify-between'>
             <LeftSidebar />
-            <section className='w-full p-6'>
+            <section className='w-full p-6 bg-black'>
               <div className=''>{children}</div>
             </section>
             {/* @ts-ignore */}

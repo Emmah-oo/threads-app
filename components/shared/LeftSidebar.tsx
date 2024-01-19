@@ -42,7 +42,7 @@ const LeftSidebar = () => {
   ];
 
   return (
-    <section className="p-5 relative min-h-[90vh] hidden md:block">
+    <section className="w-[300px] bg-[#121417] p-5 relative h-screen hidden md:block">
       <div className="flex flex-col gap-10 justify-center ml-2 mt-10">
         {sidebarLinks.map((link, i) => {
           const isActive = link.route === pathname
@@ -54,7 +54,7 @@ const LeftSidebar = () => {
                 width={20}
                 alt={link.label}
               />
-              <h1>{link.label}</h1>
+              <h1 className="text-white">{link.label}</h1>
             </Link>
           );
         })}

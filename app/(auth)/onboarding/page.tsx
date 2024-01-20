@@ -1,4 +1,4 @@
-import AccountProfile from "@/components/shared/forms/AccountProfile";
+import AccountProfile from "@/components/forms/AccountProfile";
 import React from "react";
 import { currentUser } from "@clerk/nextjs";
 
@@ -7,11 +7,11 @@ const page = async () => {
   if (!user) return null;
 
   const userInfo = {
-    _id: user?.id,
-    username: user?.username,
-    name: user?.firstName,
-    bio: '',
-    image: user.imageUrl,
+    // _id: user?.id,
+    // username: user?.username,
+    // name: user?.firstName,
+    // bio: '',
+    // image: user.imageUrl,
   };
 
   const userData = {
@@ -22,6 +22,7 @@ const page = async () => {
     bio: userInfo ? userInfo.bio : "",
     image: userInfo ? userInfo.image : user.imageUrl,
   };
+  
   return (
     <main className="mx-auto flex max-w-3xl flex-col justify-start px-10 py-20">
       <div className="w-[90%] m-auto flex flex-col">

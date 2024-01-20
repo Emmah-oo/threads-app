@@ -43,11 +43,11 @@ const LeftSidebar = () => {
 
   return (
     <section className="w-[300px] bg-[#121417] p-5 relative h-screen hidden md:block">
-      <div className="flex flex-col gap-10 justify-center ml-2 mt-10">
+      <div className="flex flex-col gap-8 justify-center ml-2 mt-10">
         {sidebarLinks.map((link, i) => {
           const isActive = link.route === pathname
           return (
-            <Link href={link.route} key={i} className={`flex items-center gap-3 hover:bg-blue-500 p-2 rounded-lg transition-all ${isActive ? 'bg-blue-500 ' : ''}`}>
+            <Link href={link.route} key={i} className={`flex items-center gap-3 hover:bg-blue p-2 rounded-lg transition-all ${isActive ? 'bg-blue' : ''}`}>
               <Image
                 src={link.imgURL}
                 height={20}

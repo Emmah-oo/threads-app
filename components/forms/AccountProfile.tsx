@@ -21,6 +21,8 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
+import { updateUser } from "@/lib/actions/user.actions";
+import { usePathname, useRouter } from "next/navigation";
 
 interface Props {
   user: {
@@ -36,13 +38,16 @@ interface Props {
 const AccountProfile = ({ user, btnTitle }: Props) => {
   const { startUpload } = useUploadThing("media");
   const [files, setFiles] = useState<File[]>([]);
+
+  const router = useRouter();
+  const pathname = usePathname();
   const form = useForm<z.infer<typeof userValidation>>({
     resolver: zodResolver(userValidation),
     defaultValues: {
-      profile_photo: user?.image ? user.image : "",
-      name: user?.name ? user.name : "",
-      username: user?.username ? user.username : "",
-      bio: user?.bio ? user.bio : "",
+      profile_photo: user.image,
+      name: user.name,
+      username: user.username,
+      bio: user.bio,
     },
   });
 
@@ -52,30 +57,19 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
   ) => {
     e.preventDefault();
 
-    // Create a new FileReader instance
     const fileReader = new FileReader();
 
-    // Check if files are present and the length is greater than 0
     if (e.target.files && e.target.files.length > 0) {
-      // Get the first file from the FileList
       const file = e.target.files[0];
-
-      // Set the state with an array of all selected files
       setFiles(Array.from(e.target.files));
 
-      // Check if the file type is an image
       if (!file.type.includes("image")) return;
 
-      // Define an event listener for when the FileReader has finished loading
       fileReader.onload = async (event) => {
-        // Get the data URL representing the file content
         const imageDataUrl = event.target?.result?.toString() || "";
-
-        // Call the fieldChange callback with the data URL
         fieldChange(imageDataUrl);
       };
 
-      // Read the file as a data URL
       fileReader.readAsDataURL(file);
     }
   };
@@ -84,13 +78,27 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     const blob = values.profile_photo;
 
     const hasImageChanged = isBase64Image(blob);
-
     if (hasImageChanged) {
       const imgRes = await startUpload(files);
 
       if (imgRes && imgRes[0].url) {
         values.profile_photo = imgRes[0].url;
       }
+    }
+
+    await updateUser({
+      name: values.name,
+      path: pathname,
+      username: values.username,
+      userId: user.id,
+      bio: values.bio,
+      image: values.profile_photo,
+    });
+
+    if (pathname === "/profile/edit") {
+      router.back();
+    } else {
+      router.push("/");
     }
   }
 

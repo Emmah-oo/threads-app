@@ -7,7 +7,7 @@ const page = async () => {
   if (!user) return null;
 
   const userInfo = {
-    // _id: user?.id,
+    _id: user?.id,
     // username: user?.username,
     // name: user?.firstName,
     // bio: '',
@@ -17,10 +17,10 @@ const page = async () => {
   const userData = {
     id: user?.id,
     objectId: userInfo?._id,
-    username: userInfo ? userInfo.username : user.username,
-    name: userInfo ? userInfo.name : user.firstName,
-    bio: userInfo ? userInfo.bio : "",
-    image: userInfo ? userInfo.image : user.imageUrl,
+    username: user.username || '',
+    name: user.firstName || '',
+    bio: "",
+    image: user.imageUrl,
   };
   
   return (

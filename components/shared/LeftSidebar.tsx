@@ -59,7 +59,7 @@ const LeftSidebar = () => {
           );
         })}
       </div>
-      <div className="flex items-center gap-3 absolute bottom-0 left-10">
+      <div className="flex text-white items-center gap-3 absolute bottom-0 left-10">
         <Image src="/assets/logout.svg" height={20} width={20} alt="logout" />
         <SignOutButton />
       </div>

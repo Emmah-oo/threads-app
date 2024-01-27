@@ -4,7 +4,7 @@ import { SignIn } from "@clerk/nextjs";
 const page = () => {
   return (
     <div className="flex items-center justify-center min-h-[100vh]">
-      <SignIn />
+      <SignIn afterSignInUrl="/onboarding" />
     </div>
   );
 };

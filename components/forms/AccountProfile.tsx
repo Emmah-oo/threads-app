@@ -50,6 +50,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       bio: user.bio,
     },
   });
+  
 
   const handleImage = (
     e: ChangeEvent<HTMLInputElement>,

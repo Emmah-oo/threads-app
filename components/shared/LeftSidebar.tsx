@@ -42,12 +42,16 @@ const LeftSidebar = () => {
   ];
 
   return (
-    <section className="w-[300px] bg-[#121417] p-5 relative h-screen hidden md:block">
-      <div className="flex flex-col gap-8 justify-center ml-2 mt-10">
+    <section className="sticky left-0 top-0 z-20 flex h-screen w-[300px] flex-col justify-between overflow-auto border-r border-r-dark-4 bg-dark-2 pb-5 pt-16 max-md:hidden">
+      <div className="flex flex-col gap-8 p-5 justify-center ml-2 mt-10">
         {sidebarLinks.map((link, i) => {
-          const isActive = link.route === pathname
+          const isActive = link.route === pathname;
           return (
-            <Link href={link.route} key={i} className={`flex items-center gap-3 hover:bg-blue p-2 rounded-lg transition-all ${isActive ? 'bg-blue' : ''}`}>
+            <Link
+              href={link.route}
+              key={i}
+              className={`flex items-center gap-3 hover:bg-blue p-2 rounded-lg transition-all ${isActive ? "bg-blue" : ""}`}
+            >
               <Image
                 src={link.imgURL}
                 height={20}

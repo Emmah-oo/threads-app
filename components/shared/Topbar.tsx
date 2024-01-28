@@ -1,21 +1,24 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { UserButton, SignedIn } from "@clerk/nextjs";
 
 const Topbar = () => {
   return (
-    <nav className="bg-[#121417] z-10">
-      <div className="py-[2vh] px-[2vh] flex items-center justify-between mx-10">
-        <div className="flex gap-2 items-center">
-          <Image src="assets/logo.svg" height={40} width={30} alt="Threads" />
-          <h1 className="text-white">Threads</h1>
-        </div>
+    <nav className="fixed top-0 z-30 flex w-full items-center justify-between bg-dark-2 px-6 py-3">
+      <div>
+        <Link href="/" className="flex items-center gap-4">
+          <Image src="assets/logo.svg" alt="logo" width={28} height={28} />
+          <p className="text-light-1 max-xs:hidden">
+            Threads
+          </p>
+        </Link>
+      </div>
 
-        <div>
-          <SignedIn>
-            <UserButton afterSignOutUrl="/" showName={true} />
-          </SignedIn>
-        </div>
+      <div>
+        <SignedIn>
+          <UserButton afterSignOutUrl="/" showName={true} />
+        </SignedIn>
       </div>
     </nav>
   );

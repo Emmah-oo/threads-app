@@ -47,7 +47,7 @@ const Bottombar = () => {
             <Link
               href={link.route}
               key={i}
-              className={`flex items-center gap-3 hover:bg-blue-500 p-2 rounded-lg transition-all ${isActive ? 'bg-blue-500 ' : ''}`}
+              className={`flex items-center gap-3 hover:bg-blue p-2 rounded-lg transition-all ${isActive ? 'bg-blue' : ''}`}
             >
               <Image
                 src={link.imgURL}

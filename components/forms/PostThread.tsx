@@ -16,8 +16,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ThreadValidation } from "@/lib/validations/thread";
+import { createThread } from "@/lib/actions/thread.actions";
+import { usePathname } from "next/navigation";
 
 function PostThread({ userId }: { userId: string }) {
+  const pathname = usePathname();
   const form = useForm<z.infer<typeof ThreadValidation>>({
     resolver: zodResolver(ThreadValidation),
     defaultValues: {
@@ -27,8 +30,12 @@ function PostThread({ userId }: { userId: string }) {
   });
 
   async function onSubmit(values: z.infer<typeof ThreadValidation>) {
-    let thread = values.thread
-    let accountId = values.accountId
+    await createThread({
+      text: values.thread,
+      author: userId,
+      communityId: null,
+      path: pathname,
+    });
   }
   return (
     <Form {...form}>

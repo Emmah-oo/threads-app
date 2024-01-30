@@ -4,9 +4,12 @@ import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { SignOutButton } from "@clerk/nextjs";
+import { SignedIn } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 const LeftSidebar = () => {
   const pathname = usePathname();
+  const router = useRouter();
   console.log(pathname);
   const sidebarLinks = [
     {
@@ -42,30 +45,42 @@ const LeftSidebar = () => {
   ];
 
   return (
-    <section className="sticky left-0 top-0 z-20 flex h-screen w-[300px] flex-col justify-between overflow-auto border-r border-r-dark-4 bg-dark-2 pb-5 pt-16 max-md:hidden">
-      <div className="flex flex-col gap-8 p-5 justify-center ml-2 mt-10">
+    <section className="sticky left-0 top-0 z-20 flex h-screen flex-col justify-between overflow-auto border-r border-r-dark-4 bg-dark-2 pb-5 pt-16 max-md:hidden lg:w-[300px] ">
+      <div className="flex flex-col gap-8 px-4 justify-center mt-10 md:items-center lg:items-baseline">
         {sidebarLinks.map((link, i) => {
           const isActive = link.route === pathname;
           return (
             <Link
               href={link.route}
               key={i}
-              className={`flex items-center gap-3 hover:bg-blue p-2 rounded-lg transition-all ${isActive ? "bg-blue" : ""}`}
+              className={`flex items-center gap-3 hover:bg-blue p-3 lg:w-[180px] rounded-lg transition-all ${isActive ? "bg-blue" : ""}`}
             >
               <Image
                 src={link.imgURL}
-                height={20}
-                width={20}
+                height={25}
+                width={25}
                 alt={link.label}
               />
-              <h1 className="text-white">{link.label}</h1>
+              <h1 className="text-white md:hidden lg:block">{link.label}</h1>
             </Link>
           );
         })}
       </div>
-      <div className="flex text-white items-center gap-3 absolute bottom-0 left-10">
-        <Image src="/assets/logout.svg" height={20} width={20} alt="logout" />
-        <SignOutButton />
+      <div className="mt-10 px-6">
+        <SignedIn>
+          <SignOutButton signOutCallback={() => router.push("/sign-in")}>
+            <div className="flex cursor-pointer gap-4 p-1">
+              <Image
+                src="/assets/logout.svg"
+                alt="logout"
+                width={25}
+                height={25}
+              />
+
+              <p className="text-light-2 md:hidden lg:block">Logout</p>
+            </div>
+          </SignOutButton>
+        </SignedIn>
       </div>
     </section>
   );

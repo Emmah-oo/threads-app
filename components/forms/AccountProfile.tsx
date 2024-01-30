@@ -41,6 +41,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 
   const router = useRouter();
   const pathname = usePathname();
+  
   const form = useForm<z.infer<typeof userValidation>>({
     resolver: zodResolver(userValidation),
     defaultValues: {

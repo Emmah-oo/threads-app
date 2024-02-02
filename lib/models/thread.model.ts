@@ -20,5 +20,5 @@ const threadSchema = new mongoose.Schema({
 });
 
 const Thread = mongoose.models.Thread || mongoose.model("Thread", threadSchema);
-console.log(mongoose.Schema.Types.ObjectId)
+// console.log(mongoose.Schema.Types.ObjectId)
 export default Thread;

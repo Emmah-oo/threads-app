@@ -17,10 +17,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ThreadValidation } from "@/lib/validations/thread";
 import { createThread } from "@/lib/actions/thread.actions";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 function PostThread({ userId }: { userId: string }) {
   const pathname = usePathname();
+  const router = useRouter()
   const form = useForm<z.infer<typeof ThreadValidation>>({
     resolver: zodResolver(ThreadValidation),
     defaultValues: {
@@ -36,6 +37,7 @@ function PostThread({ userId }: { userId: string }) {
       communityId: null,
       path: pathname,
     });
+    router.push('/')
   }
   return (
     <Form {...form}>

@@ -35,7 +35,7 @@ export default function RootLayout({
           <main className='flex w-[100%] justify-between min-h-screen'>
             <LeftSidebar />
             <section className='w-full p-6 bg-black pt-[10vh]'>
-              <div className=''>{children}</div>
+              <div>{children}</div>
             </section>
             {/* @ts-ignore */}
             <RightSidebar />

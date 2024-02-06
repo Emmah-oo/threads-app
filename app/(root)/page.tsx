@@ -8,7 +8,7 @@ const Page = async () => {
   const user = await currentUser();
   const result = await fetchThreads(1, 30);
 
-  console.log(result);
+  // console.log(result);
 
   return (
     <div className="w-[100%] text-white">

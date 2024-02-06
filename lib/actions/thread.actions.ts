@@ -60,7 +60,7 @@ export async function fetchThreads(pageNumber = 1, pageSize = 20) {
       },
     });
 
-  // Count the total number of top-level posts (threads) i.e., threads that are not comments.
+  // Count the total number of top-level threads i.e., threads that are not comments.
   const totalThreadsCount = await Thread.countDocuments({
     parentId: { $in: [null, undefined] },
   }); // Get the total count of posts
@@ -70,4 +70,41 @@ export async function fetchThreads(pageNumber = 1, pageSize = 20) {
   const isNext = totalThreadsCount > skipAmount + threads.length;
 
   return { threads, isNext };
+}
+
+export async function fetchThreadById(threadId: string) {
+  connectToDB();
+
+  try {
+    const thread = Thread.findById(threadId)
+      .populate({
+        path: "author",
+        model: User,
+        select: "_id id name image",
+      })
+      .populate({
+        path: "children",
+        populate: [
+          {
+            path: "author",
+            model: User,
+            select: "_id id name parentId image",
+          },
+          {
+            path: "children",
+            model: Thread,
+            populate: {
+              path: "author",
+              model: User,
+              select: "_id id name parentId image"
+            }
+          }
+        ],
+      }).exec()
+
+      return thread
+     
+  } catch (error: any) {
+    throw new Error(`Error fetching thread: ${error.message}`)
+  }
 }

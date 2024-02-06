@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import ThreadCard from "@/components/cards/ThreadCard";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
@@ -16,7 +16,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   const thread = await fetchThreadById(params.id);
-  console.log(thread)
+  console.log(thread);
   return (
     <section className="relative pt-[5vh]">
       <div>
@@ -34,10 +34,10 @@ const Page = async ({ params }: { params: { id: string } }) => {
       </div>
 
       <div className="mt-7">
-        <Comment 
-        threadId={thread.id}
-        currentUserImg={user.imageUrl}
-        currentUserId={JSON.stringify(userInfo._id)}
+        <Comment
+          threadId={thread.id}
+          currentUserImg={user.imageUrl}
+          currentUserId={JSON.stringify(userInfo._id)}
         />
       </div>
     </section>

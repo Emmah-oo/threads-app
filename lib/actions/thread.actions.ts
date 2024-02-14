@@ -54,7 +54,7 @@ export async function fetchThreads(pageNumber = 1, pageSize = 20) {
     .populate({
       path: "children", // Populate the children field
       populate: {
-        path: "author", // Populate the author field within children
+        path: "author", // Populate the author field within each child
         model: User,
         select: "_id name parentId image", // Select only _id and username fields of the author
       },

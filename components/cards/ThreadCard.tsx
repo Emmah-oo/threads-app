@@ -48,7 +48,7 @@ const ThreadCard = ({
                 src={author.image}
                 alt="Profile Image"
                 fill
-                className="cursor-pointer rounded-full"
+                className="cursor-pointer rounded-full object-cover"
               />
             </Link>
 

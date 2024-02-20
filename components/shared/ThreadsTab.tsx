@@ -1,3 +1,4 @@
+"use server"
 import { fetchUserThreads } from "@/lib/actions/user.actions";
 import ThreadCard from "../cards/ThreadCard";
 import { redirect } from "next/navigation";
@@ -10,6 +11,7 @@ interface Props {
 
 const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
   let result = await fetchUserThreads(accountId);
+  console.log(result)
 
   if (!result) redirect("/");
   return (
@@ -21,7 +23,15 @@ const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
           currentUserId={currentUserId}
           parentId={thread.parentId}
           content={thread.text}
-          author={thread.author}
+          author={
+            accountType === "User"
+              ? { name: result.name, image: result.image, id: result.id }
+              : {
+                  name: thread.author.name,
+                  image: thread.author.image,
+                  id: thread.author.id,
+                }
+          }
           community={thread.community}
           createdAt={thread.createdAt}
           comments={thread.children}

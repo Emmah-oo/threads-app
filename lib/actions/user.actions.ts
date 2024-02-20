@@ -51,7 +51,7 @@ export async function fetchUser(userId: string) {
     connectToDB();
 
     //Returns the user based on the userId passed
-    return await User.findOne({ userId });
+    return await User.findOne({ id: userId });
     // .populate({
     //   path: "communities",
     //   model: Community,

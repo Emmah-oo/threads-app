@@ -1,3 +1,4 @@
+"use server";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { fetchUser } from "@/lib/actions/user.actions";
@@ -14,6 +15,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
   if (!user) return null;
 
   const userInfo = await fetchUser(params.id);
+  console.log(userInfo);
 
   //redirect to oboarding if the user hasn't completed the onboarding process
   if (!userInfo?.onboarded) redirect("/onboarding");
@@ -70,7 +72,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
               <ThreadsTab
                 currentUserId={user.id}
                 accountId={userInfo.id}
-                accountType="user"
+                accountType="User"
               />
             </TabsContent>
           ))}

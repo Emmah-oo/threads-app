@@ -6,11 +6,12 @@ import { usePathname } from "next/navigation";
 import { SignOutButton } from "@clerk/nextjs";
 import { SignedIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-
+import { useAuth } from "@clerk/nextjs";
 const LeftSidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
-  console.log(pathname);
+  const { userId } = useAuth();
+
   const sidebarLinks = [
     {
       imgURL: "/assets/home.svg",
@@ -50,7 +51,9 @@ const LeftSidebar = () => {
         {sidebarLinks.map((link, i) => {
           const isActive =
             link.route === pathname ||
-            pathname.split("/")[1].includes(link.route);
+            (pathname.includes(link.route) && link.route.length > 1);
+
+          if (link.route === "/profile") link.route = `${link.route}/${userId}`;
           return (
             <Link
               href={link.route}

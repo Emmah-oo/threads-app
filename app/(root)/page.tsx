@@ -1,12 +1,24 @@
-"use server"
+"use server";
 import { fetchThreads } from "@/lib/actions/thread.actions";
 import React from "react";
 import { currentUser } from "@clerk/nextjs";
 import ThreadCard from "@/components/cards/ThreadCard";
+import { redirect } from "next/navigation";
+import { fetchUser } from "@/lib/actions/user.actions";
 
 const Page = async () => {
   const user = await currentUser();
   const result = await fetchThreads(1, 30);
+
+  //if no logged in user redirect
+  if (!user) return null;
+
+  // console.log(user.id);
+
+  const userInfo = await fetchUser(user.id);
+
+  //redirect to oboarding if the user hasn't completed the onboarding process
+  if (!userInfo?.onboarded) redirect("/onboarding");
 
   // console.log(result);
 

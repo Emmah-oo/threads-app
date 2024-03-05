@@ -4,6 +4,7 @@ import { connectToDB } from "../mongoose";
 import Thread from "../models/thread.model";
 import User from "../models/user.model";
 import { revalidatePath } from "next/cache";
+
 interface Params {
   text: string;
   author?: string;
@@ -50,6 +51,11 @@ export async function fetchThreads(pageNumber = 1, pageSize = 20) {
     .populate({
       path: "author",
       model: User,
+    })
+    .populate({
+      path: "likes",
+      model: User,
+      select: "name, image"
     })
     .populate({
       path: "children", // Populate the children field

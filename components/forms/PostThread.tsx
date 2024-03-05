@@ -21,7 +21,7 @@ import { useRouter, usePathname } from "next/navigation";
 
 function PostThread({ userId }: { userId: string }) {
   const pathname = usePathname();
-  const router = useRouter()
+  const router = useRouter();
   const form = useForm<z.infer<typeof ThreadValidation>>({
     resolver: zodResolver(ThreadValidation),
     defaultValues: {
@@ -31,13 +31,14 @@ function PostThread({ userId }: { userId: string }) {
   });
 
   async function onSubmit(values: z.infer<typeof ThreadValidation>) {
+    console.log("Submitting thread with values:", values);
     await createThread({
       text: values.thread,
       author: userId,
       communityId: null,
       path: pathname,
     });
-    router.push('/')
+    router.push("/");
   }
   return (
     <Form {...form}>

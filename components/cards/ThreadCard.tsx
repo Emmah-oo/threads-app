@@ -11,6 +11,7 @@ interface Props {
     image: string;
     id: string;
   };
+  likes: string[];
   community: {
     name: string;
     image: string;
@@ -31,6 +32,7 @@ const ThreadCard = ({
   parentId,
   content,
   author,
+  likes,
   community,
   createdAt,
   comments,
@@ -64,23 +66,29 @@ const ThreadCard = ({
 
             <p className="mt-2 text-small-regular text-light-2">{content}</p>
 
-            <div className={`${isComment && 'mb-10'} mt-5 flex flex-col gap-3`}>
+            <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className="flex gap-3.5">
-                <Image
-                  src="/assets/heart-gray.svg"
-                  alt="heart"
-                  width={24}
-                  height={24}
-                  className="cursor-pointer object-contain"
-                />
-                <Link href={`/thread/${id}`}>
+                <div className="flex items-center gap-1">
                   <Image
-                    src="/assets/reply.svg"
+                    src="/assets/heart-gray.svg"
                     alt="heart"
                     width={24}
                     height={24}
                     className="cursor-pointer object-contain"
                   />
+                  <p>{likes?.length}</p>
+                </div>
+                <Link href={`/thread/${id}`}>
+                  <div className="flex items-center gap-1">
+                    <Image
+                      src="/assets/reply.svg"
+                      alt="heart"
+                      width={24}
+                      height={24}
+                      className="cursor-pointer object-contain"
+                    />
+                    <p>{comments.length}</p>
+                  </div>
                 </Link>
                 <Image
                   src="/assets/repost.svg"

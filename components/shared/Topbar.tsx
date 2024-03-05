@@ -31,12 +31,12 @@ const Topbar = () => {
         </div>
 
         <OrganizationSwitcher
-          appearance={{
-            baseTheme: dark,
-            elements: {
-              organizationSwitcherTrigger: "py-2 px-4",
-            },
-          }}
+          // appearance={{
+          //   baseTheme: dark,
+          //   elements: {
+          //     organizationSwitcherTrigger: "py-2 px-4 block",
+          //   },
+          // }}
         />
       </div>
     </nav>

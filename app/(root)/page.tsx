@@ -13,7 +13,7 @@ const Page = async () => {
   //if no logged in user redirect
   if (!user) return null;
 
-  // console.log(user.id);
+  console.log(result);
 
   const userInfo = await fetchUser(user.id);
 
@@ -40,6 +40,7 @@ const Page = async () => {
                   parentId={thread.parentId}
                   content={thread.text}
                   author={thread.author}
+                  likes={thread.likes}
                   community={thread.community}
                   createdAt={thread.createdAt}
                   comments={thread.children}

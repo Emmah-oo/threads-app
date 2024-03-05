@@ -19,14 +19,14 @@ const page = async () => {
   const activity = await getActivity(userInfo._id);
   return (
     <section>
-      <h1 className="text-white mb-10">Activity</h1>
+      <h1 className="text-heading2-bold text-light-1 mb-10">Activity</h1>
 
       <section className="mt-10 flex flex-col gap-5">
         {activity.length > 0 ? (
           <>
             {activity.map((activity) => (
               <Link key={activity._id} href={`/thread/${activity.parentId}`}>
-                <article className="activity-card">
+                <article className="flex items-center gap-2 rounded-md bg-dark-2 px-7 py-4">
                   <Image
                     src={activity.author.image}
                     alt="Profile Picture"
@@ -34,6 +34,13 @@ const page = async () => {
                     width={20}
                     className="rounded-full object-contain"
                   />
+                  <p className="!text-small-regular text-light-1">
+                    <span className="mr-1 text-primary-500">
+                      {activity.author.name}
+                    </span>
+                    {""}
+                    replied to your thread
+                  </p>
                 </article>
               </Link>
             ))}

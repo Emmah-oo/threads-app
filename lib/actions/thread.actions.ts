@@ -12,6 +12,36 @@ interface Params {
   path: string;
 }
 
+export async function likeThread(userId: string, threadId: string[]) {
+  try {
+    connectToDB();
+
+    // Fetch the thread from the database
+    const thread = await Thread.findById(threadId);
+
+    if (!thread) {
+      throw new Error("Thread not found");
+    }
+
+    // Check if the user has already liked the thread
+    const userLiked = thread.likes.includes(userId);
+
+    if (userLiked) {
+      // If already liked, unlike
+      thread.likes = thread.likes.filter((id: any) => id !== userId);
+    } else {
+      // If not liked, like
+      thread.likes.push(userId);
+    }
+
+    // Save the updated thread back to the database
+    await thread.save();
+    console.log(threadId);
+  } catch (error: any) {
+    throw new Error(`Failed to like thread ${error.message}`);
+  }
+}
+
 export async function createThread({
   text,
   author,
@@ -55,7 +85,7 @@ export async function fetchThreads(pageNumber = 1, pageSize = 20) {
     .populate({
       path: "likes",
       model: User,
-      select: "name, image"
+      select: "name, image",
     })
     .populate({
       path: "children", // Populate the children field

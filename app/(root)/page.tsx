@@ -13,9 +13,10 @@ const Page = async () => {
   //if no logged in user redirect
   if (!user) return null;
 
-  console.log(result);
+  
 
   const userInfo = await fetchUser(user.id);
+  console.log(userInfo);
 
   //redirect to oboarding if the user hasn't completed the onboarding process
   if (!userInfo?.onboarded) redirect("/onboarding");
@@ -37,6 +38,7 @@ const Page = async () => {
                   key={thread._id}
                   id={thread._id}
                   currentUserId={user?.id || ""}
+                  userId={userInfo?._id || ""}
                   parentId={thread.parentId}
                   content={thread.text}
                   author={thread.author}

@@ -1,15 +1,10 @@
+import { formatDateString } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import Interactions from "../shared/Interactions";
 
 interface Props {
   id: string;
   currentUserId: string;
-  userId: {
-    _id: string;
-    name: string;
-    image: string;
-  };
   parentId: string | null;
   content: string;
   author: {
@@ -17,7 +12,6 @@ interface Props {
     image: string;
     id: string;
   };
-  likes: string[];
   community: {
     name: string;
     image: string;
@@ -35,11 +29,9 @@ interface Props {
 const ThreadCard = ({
   id,
   currentUserId,
-  userId,
   parentId,
   content,
   author,
-  likes,
   community,
   createdAt,
   comments,
@@ -73,16 +65,76 @@ const ThreadCard = ({
 
             <p className="mt-2 text-small-regular text-light-2">{content}</p>
 
-            <Interactions
-              isComment={isComment}
-              likes={likes}
-              id={id}
-              comments={comments}
-              userId={userId}
-            />
+            <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
+              <div className="flex gap-3.5">
+                <div className="flex items-center gap-1">
+                  <Image
+                    src="/assets/heart-gray.svg"
+                    alt="heart"
+                    width={24}
+                    height={24}
+                    className="cursor-pointer object-contain"
+                  />
+                </div>
+                <Link href={`/thread/${id}`}>
+                  <div className="flex items-center gap-1">
+                    <Image
+                      src="/assets/reply.svg"
+                      alt="heart"
+                      width={24}
+                      height={24}
+                      className="cursor-pointer object-contain"
+                    />
+                  </div>
+                </Link>
+                <Image
+                  src="/assets/repost.svg"
+                  alt="heart"
+                  width={24}
+                  height={24}
+                  className="cursor-pointer object-contain"
+                />
+                <Image
+                  src="/assets/share.svg"
+                  alt="heart"
+                  width={24}
+                  height={24}
+                  className="cursor-pointer object-contain"
+                />
+              </div>
+
+              {isComment && comments.length > 0 && (
+                <Link href={`/thread/${id}`}>
+                  <p className="mt-1 text-subtle-medium text-gray-1">
+                    {`${comments.length} ${comments.length === 1 ? "reply" : "replies"}`}
+                  </p>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
+
+        {/* Delete thread */}
+        {/* Show comment logos */}
       </div>
+      {!isComment && community && (
+        <Link
+          href={`/communities/${community.id}`}
+          className="mt-5 flex items-center"
+        >
+          <p className="text-subtle-medium text-gray-1">
+            {formatDateString(createdAt)} {""} - {community.name} Community
+          </p>
+
+          <Image
+            src={community.image}
+            alt={community.name}
+            width={14}
+            height={14}
+            className="ml-1 rounded-full object-cover"
+          />
+        </Link>
+      )}
     </article>
   );
 };

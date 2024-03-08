@@ -28,7 +28,7 @@ function Searchbar({ routeType }: Props) {
   }, [search, routeType]);
 
   return (
-    <div className='searchbar'>
+    <div className='flex gap-1 rounded-lg bg-dark-3 px-4 py-2;'>
       <Image
         src='/assets/search-gray.svg'
         alt='search'
@@ -41,9 +41,9 @@ function Searchbar({ routeType }: Props) {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder={`${
-          routeType !== "/search" ? "Search communities" : "Search creators"
+          routeType === "/search" ? "Search communities" : "Search creators"
         }`}
-        className='no-focus searchbar_input'
+        className='no-focus border-none bg-dark-3 text-base-regular text-light-4 outline-none !important'
       />
     </div>
   );

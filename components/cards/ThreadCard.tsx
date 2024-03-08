@@ -1,6 +1,7 @@
 import { formatDateString } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import DeleteThread from "../forms/DeleteThread";
 
 interface Props {
   id: string;

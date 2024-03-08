@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { SignedIn, UserButton, SignOutButton } from "@clerk/nextjs";
+import { SignedIn, SignOutButton, OrganizationSwitcher } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 
 const Topbar = () => {
@@ -30,7 +30,7 @@ const Topbar = () => {
           </SignedIn>
         </div>
 
-        <UserButton />
+        <OrganizationSwitcher />
       </div>
     </nav>
   );
